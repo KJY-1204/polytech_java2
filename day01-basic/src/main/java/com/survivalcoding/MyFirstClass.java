@@ -6,7 +6,10 @@ public class MyFirstClass {
         final int i=0; //funal 상수를 지정한다
         // i=10; i수정 불가 상수라서
         //sout
-        System.out.println("hello");
+
+        String name = "홍길동";
+
+        System.out.println("hello"+name);
 
     }
 }

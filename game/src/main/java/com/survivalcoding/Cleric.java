@@ -6,4 +6,10 @@ public class Cleric {
     String name;
     int HP = 50;
     int MP = 10;
+
+    void selfAid() {
+        System.out.println("셀프 에이드");
+        MP = -5;
+        HP = MAXHP;
+    }
 }

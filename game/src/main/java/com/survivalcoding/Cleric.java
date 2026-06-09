@@ -8,6 +8,26 @@ public class Cleric {
     int HP = MAXHP;
     int MP = MAXMP;
 
+
+    public Cleric(String name) {
+        this.name = name;
+        this.HP = MAXHP;
+        this.MP = MAXMP;
+    }
+
+    public Cleric(String name, int hp) {
+        this.name = name;
+        this.HP = hp;
+        this.MP = MAXMP;
+    }
+
+    public Cleric(String name, int hp, int mp) {
+        this.name = name;
+        this.HP = hp;
+        this.MP = mp;
+    }
+
+
     void selfAid() {
         System.out.println("셀프 에이드 시전");
         if (MP >= SelfAidCost) {
@@ -41,6 +61,5 @@ public class Cleric {
         System.out.println("MP가 " + heelmp + " 만큼 회복됨니다.");
         return heelmp;
     }
-
 
 }

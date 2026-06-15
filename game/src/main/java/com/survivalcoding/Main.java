@@ -1,7 +1,9 @@
 package com.survivalcoding;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,6 +36,14 @@ public class Main {
         System.out.println("List에 담긴 Person 목록");
         for (Person person : personList) {
             System.out.println("이름 : " + person.getName());
+        }
+
+        Map<String, Integer> NameAgeList = new HashMap<>();
+        NameAgeList.put(personList.get(0).getName(), 20);
+        NameAgeList.put(personList.get(1).getName(), 25);
+
+        for (Person person : personList) {
+            System.out.println(person.getName() + "의 나이는 " + NameAgeList.get(person.getName()) + "살");
         }
     }
 }

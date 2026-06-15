@@ -14,6 +14,14 @@ public class Person {
         this.birthYear = brithYear;
     }
 
+    public Person(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Person은 반드시 유효한 이름을 포함해야 합니다.");
+        }
+        this.name = name;
+        this.birthYear = 0;
+    }
+
     public String getName() {
         return name;
     }
@@ -28,4 +36,7 @@ public class Person {
 
         return currentYear - this.birthYear;
     }
+    //List에 담긴 모든 Person 인스턴스의 이름을 표시하는 코드는 Main클래스에 있다
 }
+
+

@@ -34,6 +34,20 @@ package com.survivalcoding {
         +setPower(power: double) : void
     }
 
+    class Hero {
+        -name : String
+        -HP : int
+        -MaxHP : int = 100
+        +Hero(name: String, HP: int)
+        +getHP() : int
+        +setHP(HP: int) : void
+        +getName() : String
+        +setName(name: String) : void
+        +getMaxHP() : int
+        +setMaxHP(maxHP: int) : void
+        ~attack() : void
+    }
+
     class Wizard {
         -wand : Wand
         -hp : int
@@ -50,13 +64,10 @@ package com.survivalcoding {
         +setName(name: String) : void
     }
 
-    class Hero {
-        ~name : String
-        ~HP : int
-        +Hero(name: String, HP: int)
-        +getHP() : int
-        +setHP(HP: int) : void
-        ~attack() : void
+    class GreatWizard {
+        +GreatWizard()
+        ~heal(hero: Hero) : void
+        +superHeal(hero: Hero) : void
     }
 
     class Slime {
@@ -80,9 +91,11 @@ package com.survivalcoding {
 
 ' ---- 클래스 간의 관계 표현 영역 ----
 
-' 1. 마법사 관련 관계
+' 1. 마법사 및 대마법사 관련 관계
 Wizard "1" --> "1" Wand : 가집니다 (has)
 Wizard ..> Hero : heal()에서 참조 (uses)
+Wizard <|-- GreatWizard : 상속 (extends)
+GreatWizard ..> Hero : heal(), superHeal()에서 참조 (uses)
 
 ' 2. 슬라임 관련 관계
 Slime <|-- PoisonSlime : 상속 (extends)

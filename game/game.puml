@@ -1,70 +1,65 @@
 @startuml
 package com.survivalcoding {
-class Cleric {
-    {static} +MAXHP : int = 50
-    {static} +MAXMP : int = 10
-    -SelfAidCost : int = 5 {readOnly}
-    ~name : String
-    ~HP : int = 50
-    ~MP : int = 10
 
-    +Cleric(name: String)
-    +Cleric(name: String, hp: int)
-    +Cleric(name: String, hp: int, mp: int)
+    class Cleric {
+        {static} +MAXHP : int = 50
+        {static} +MAXMP : int = 10
+        -SelfAidCost : int = 5 {readOnly}
+        ~name : String
+        ~HP : int = 50
+        ~MP : int = 10
+        +Cleric(name: String)
+        +Cleric(name: String, hp: int)
+        +Cleric(name: String, hp: int, mp: int)
+        ~selfAid() : void
+        ~pray(time: int) : int
+    }
 
-    ~selfAid() : void
-    ~pray(time: int) : int
-}
-class Person {
-    -name : String {readOnly}
-    -birthYear : int {readOnly}
+    class Person {
+        -name : String {readOnly}
+        -birthYear : int {readOnly}
+        +Person(name: String, brithYear: int)
+        +Person(name: String)
+        +getName() : String
+        +getBirthYear() : int
+        +getAge() : int
+    }
 
-    +Person(name: String, brithYear: int)
-    +Person(name: String)
+    class Wand {
+        -name : String
+        -power : double
+        +getName() : String
+        +setName(name: String) : void
+        +getPower() : double
+        +setPower(power: double) : void
+    }
 
-    +getName() : String
-    +getBirthYear() : int
-    +getAge() : int
-}
-class Wand {
-    -name : String
-    -power : double
+    class Wizard {
+        -wand : Wand
+        -hp : int
+        -mp : int
+        -name : String
+        ~heal(hero: Hero) : void
+        +getWand() : Wand
+        +setWand(wand: Wand) : void
+        +getHp() : int
+        +setHp(hp: int) : void
+        +getMp() : int
+        +setMp(mp: int) : void
+        +getName() : String
+        +setName(name: String) : void
+    }
 
-    +getName() : String
-    +setName(name: String) : void
-    +getPower() : double
-    +setPower(power: double) : void
-}
-class Wizard {
-    -wand : Wand
-    -hp : int
-    -mp : int
-    -name : String
+    class Hero {
+        ~name : String
+        ~HP : int
+        +Hero(name: String, HP: int)
+        +getHP() : int
+        +setHP(HP: int) : void
+        ~attack() : void
+    }
 
-    ~heal(hero: Hero) : void
-    +getWand() : Wand
-    +setWand(wand: Wand) : void
-    +getHp() : int
-    +setHp(hp: int) : void
-    +getMp() : int
-    +setMp(mp: int) : void
-    +getName() : String
-    +setName(name: String) : void
-}
-
-' 클래스 간의 관계 표현 (선택 사항)
-Wizard "1" --> "1" Wand : 가집니다 (has)
-Wizard ..> Hero : 참조합니다 (uses)
-class Hero {
-    ~name : String
-    ~HP : int
-
-    +Hero(name: String, HP: int)
-    +getHP() : int
-    +setHP(HP: int) : void
-    ~attack() : void
-}
-class Slime {
+    class Slime {
         -suffix : String {readOnly}
         -hp : int
         +Slime(suffix: String, hp: int)
@@ -74,11 +69,24 @@ class Slime {
         ~attack(hero: Hero) : void
     }
 
-class PoisonSlime {
+    class PoisonSlime {
         -poisonCount : int = 5
         +PoisonSlime(suffix: String)
         +attack(hero: Hero) : void
         +getPoisonCount() : int
     }
-    }
+
+}
+
+' ---- 클래스 간의 관계 표현 영역 ----
+
+' 1. 마법사 관련 관계
+Wizard "1" --> "1" Wand : 가집니다 (has)
+Wizard ..> Hero : heal()에서 참조 (uses)
+
+' 2. 슬라임 관련 관계
+Slime <|-- PoisonSlime : 상속 (extends)
+Slime ..> Hero : attack()에서 참조 (uses)
+PoisonSlime ..> Hero : attack()에서 참조 (uses)
+
 @enduml

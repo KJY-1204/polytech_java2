@@ -4,6 +4,11 @@ public class Hero {
     String name;
     int HP;
 
+    public Hero(String name, int HP) {
+        this.name = name;
+        this.HP = HP;
+    }
+
     public int getHP() {
         return HP;
     }

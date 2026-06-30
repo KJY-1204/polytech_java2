@@ -10,16 +10,23 @@ class BookTest {
 
     @Test
     void testEquals() {
-        Date publishDate = new Date(124, 0, 1);
+        java.util.Calendar cal1 = java.util.Calendar.getInstance();
+        cal1.set(2024, java.util.Calendar.JANUARY, 1, 9, 0, 0); // 2024-01-01 09:00:00
+        Date morningDate = cal1.getTime();
+
+        java.util.Calendar cal2 = java.util.Calendar.getInstance();
+        cal2.set(2024, java.util.Calendar.JANUARY, 1, 23, 59, 59); // 2024-01-01 23:59:59
+        Date eveningDate = cal2.getTime();
+
 
         Book book1 = new Book();
         book1.setTitle("자바 마스터");
-        book1.setPublishDate(publishDate);
+        book1.setPublishDate(morningDate);
         book1.setComment("첫 번째 책");
 
         Book book2 = new Book();
         book2.setTitle("자바 마스터");
-        book2.setPublishDate(publishDate);
+        book2.setPublishDate(eveningDate);
         book2.setComment("내용만 다른 두 번쨰 책");
 
         assertEquals(book1, book2);

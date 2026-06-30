@@ -54,11 +54,26 @@ public class Book implements Comparable<Book>, Cloneable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
+        if (this.publishDate != null && book.publishDate != null) {
+            // 년-월-일 형태로 포맷을 지정
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+            String d1 = sdf.format(this.publishDate);
+            String d2 = sdf.format(book.publishDate);
+
+            return Objects.equals(title, book.title) && d1.equals(d2);
+        }
         return Objects.equals(title, book.title) && Objects.equals(publishDate, book.publishDate);
     }
 
     @Override
     public int hashCode() {
+        if (this.publishDate != null) {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+            String dateStr = sdf.format(this.publishDate);
+            return Objects.hash(title, dateStr);
+        }
+        
         return Objects.hash(title, publishDate);
     }
 
